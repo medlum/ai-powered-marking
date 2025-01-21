@@ -13,6 +13,7 @@ st.set_page_config(page_title="AI-Powered Marking Assistant",
                    initial_sidebar_state="expanded")
 
 # ---------set button css-------------#
+
 st.markdown(custom_css, unsafe_allow_html=True)
 
 # --- Initialize the Inference Client with the API key ----#
@@ -55,6 +56,7 @@ if 'msg_history' not in st.session_state:
 
 # ------- Set up header --------#
 with st.sidebar:
+    st.subheader("AI-Powered Marking Assistant")
     student_name = st.text_input(":blue[Enter student name]", placeholder="Name")
     model_id = st.selectbox(":blue[Select a model]", 
                             ["Qwen/Qwen2.5-72B-Instruct",
