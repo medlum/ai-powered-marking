@@ -4,7 +4,7 @@ from utils import *
 from streamlit_extras.grid import grid
 import streamlit as st
 from pypdf import PdfReader
-
+from streamlit_pdf_viewer import pdf_viewer
 
 # ---------set up page config -------------#
 st.set_page_config(page_title="AI-Powered Marking Assistant",
@@ -86,13 +86,17 @@ if upload_student_report:
     reader = PdfReader(upload_student_report)
     num_pages = len(reader.pages)
     pages = reader.pages[:num_pages]
+    for page_num, page in enumerate(pages):
+        student_report += page.extract_text()
 
-    st.subheader(f"**The internship report has {num_pages} page(s).**")
+    st.subheader(f"**Internship report has {num_pages} page(s)**")
     with st.container(height=400, border=True):
-        for page_num, page in enumerate(pages):
-            student_report += page.extract_text()
-            st.write(f"**Page {page_num + 1}**")
-            st.text(page.extract_text())
+        pdf_viewer(upload_student_report.getvalue())
+    
+   
+
+            #st.write(f"**Page {page_num + 1}**")
+            #st.text(page.extract_text())
     
 
 # ---- Input field for users to continue the conversation -----#
