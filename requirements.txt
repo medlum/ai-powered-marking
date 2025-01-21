@@ -2,3 +2,4 @@ pypdf
 streamlit
 huggingface_hub
 streamlit_extras
+streamlit_pdf_viewer
