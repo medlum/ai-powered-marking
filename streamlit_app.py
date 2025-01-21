@@ -82,14 +82,13 @@ if upload_mark_rubric:
 
 if upload_student_report:
     
-    st.subheader(f"**The internship report has {num_pages} page(s).**")
+    student_report = ""
+    reader = PdfReader(upload_student_report)
+    num_pages = len(reader.pages)
+    pages = reader.pages[:num_pages]
 
+    st.subheader(f"**The internship report has {num_pages} page(s).**")
     with st.container(height=400, border=True):
-        
-        student_report = ""
-        reader = PdfReader(upload_student_report)
-        num_pages = len(reader.pages)
-        pages = reader.pages[:num_pages]
         for page_num, page in enumerate(pages):
             student_report += page.extract_text()
             st.write(f"**Page {page_num + 1}**")
