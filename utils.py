@@ -22,3 +22,11 @@ custom_css = """
     }
 </style>
 """
+
+
+intro_var = """
+This app marks using specific marking rubrics from INT6. 
+It includes introduction, OJT Plan, analysis and reflection on 3 experiences, 
+showcase of accomplished task/achievement, diversity and inclusion, influence of internship on future plan and quality of writing.
+
+"""

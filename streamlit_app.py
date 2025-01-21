@@ -56,7 +56,9 @@ if 'msg_history' not in st.session_state:
 
 # ------- Set up header --------#
 with st.sidebar:
-    st.subheader("AI-Powered Marking Assistant")
+    st.subheader("AI-Powered Marking")
+    st.markdown(f'<span style="font-size:12px; color:gray;">{intro_var}</span>', unsafe_allow_html=True)
+    st.divider()
     student_name = st.text_input(":blue[Enter student name]", placeholder="Name")
     model_id = st.selectbox(":blue[Select a model]", 
                             ["Qwen/Qwen2.5-72B-Instruct",
@@ -94,23 +96,16 @@ if upload_student_report:
     st.subheader(f"**Internship report has {num_pages} page(s)**")
     with st.container(height=400, border=True):
         pdf_viewer(upload_student_report.getvalue())
-    
-   
-
-            #st.write(f"**Page {page_num + 1}**")
-            #st.text(page.extract_text())
-    
 
 # ---- Input field for users to continue the conversation -----#
 
-if st.sidebar.button("Evaluate Report"):
+if st.sidebar.button(":material/search_insights: Evaluate Report"):
 
     st.session_state.msg_history.append({"role": "system",
                                              "content": f"Here are the marking rubrics to reference for marking: {mark_rubric}"})
     
     st.session_state.msg_history.append({"role": "system",
                                              "content": f"Mark this internship report: {student_report} for student name: {student_name}"})
-
 
     # ----- Create a placeholder for the streaming response ------- #
     with st.empty():
@@ -133,12 +128,13 @@ if st.sidebar.button("Evaluate Report"):
                 collected_response += chunk.choices[0].delta.content
                 st.chat_message("assistant").write(collected_response)
         
-
+        
     # Add the assistant's response to the conversation history
     st.session_state.msg_history.append(
         {"role": "assistant", "content": collected_response})
     
-if st.sidebar.button("Clear History"):
+if st.sidebar.button(":material/refresh: Clear History"):
+
     del st.session_state.msg_history[1:]
     st.rerun()
 
@@ -149,20 +145,4 @@ if st.sidebar.button("Clear History"):
     #                   file_name="sample.text",
     #                   mime="text/plain")
 
-    #option_map = {
-    #    0: ":material/search_insights:",
-    #    1: ":material/refresh:",
-    #    2: ":material/download:",
-    #    #3: ":material/zoom_out_map:",
-    #    }
-    #selection = st.pills(   
-    #    "Tool",
-    #    options=option_map.keys(),
-    #    format_func=lambda option: option_map[option],
-    #    selection_mode="single",
-    #    help='testing'
-    #)
-    #st.write(
-    #    "Your selected option: "
-    #    f"{None if selection is None else option_map[selection]}"
-    #)
+
