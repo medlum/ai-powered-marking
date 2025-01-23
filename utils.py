@@ -24,12 +24,6 @@ custom_css = """
 """
 
 
-intro_var = """
-This app marks using specific marking rubrics from INT6. 
-It includes introduction, OJT Plan, analysis and reflection on 3 experiences, 
-showcase of accomplished task/achievement, diversity and inclusion, influence of internship on future plan and quality of writing.
-
-"""
 
 
 system_message_var = """
@@ -52,10 +46,21 @@ learning experiences and share in-depth details about their work and what they l
 
 """
 
-model_help = ":red[Model with less than 32B parameter are faster but at the expense of a better answer.]"
 
-rubrics_help = ":red[Upload the marking rubrics from INT6 in PDF]"
+
+model_help = ":red[Model with less parameters is faster but often at the expense of a quality answer.]"
+
+rubrics_help = ":red[Upload the marking rubrics in PDF.]"
 
 report_help =":red[Upload a student's internship report in PDF]"
 
 eval_btn_help = ":red[Click to evaluate the internship report]"
+
+intro_var = """
+:gray[Assistive marking AI uses specific marking rubrics to evaluate reports.
+Marking rubrics ought to include a **criterion** column with the appropriate breakdown.]
+"""
+
+disclaimer_var = "Disclaimer: This AI-powered tool is designed to assist in marking reports by providing helpful suggestions and evaluations. However, it may occasionally make errors or misinterpret content. Final judgment and accuracy should be verified by a qualified evaluator."
+
+creator_var = "Andy Oh is the creator behind this AI-powered tool, designed to transform how educators manage their workload by introducing an innovative solution to streamline their tasks." 

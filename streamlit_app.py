@@ -6,11 +6,11 @@ from pypdf import PdfReader
 from streamlit_pdf_viewer import pdf_viewer
 
 # ---------set up page config -------------#
-st.set_page_config(page_title="AI-Powered Marking Assistant",
+st.set_page_config(page_title="Assistive Marking AI Tool",
                    layout="wide",
                    page_icon="🐶",
                    initial_sidebar_state="expanded")
-
+#<div data-testid="stImageContainer" class="st-emotion-cache-1v0mbdj e1wa958q1"><img src="http://localhost:8501/media/3e3ef358147fb3104c7e13787e6a5c9b0f7c24f75e18f9a0c51f1513.jpg" alt="0" style="width: 100px; max-width: 100%;"></div>
 # ---------set button css-------------#
 st.markdown(custom_css, unsafe_allow_html=True)
 
@@ -44,9 +44,7 @@ for msg in st.session_state.msg_history:
 
 # ------- create side bar --------#
 with st.sidebar:
-    st.subheader("AI-Powered Marking")
-    st.markdown(f'<span style="font-size:12px; color:gray;">{intro_var}</span>', unsafe_allow_html=True)
-    st.divider()
+    st.title("Assistive Marking AI Tool", help=intro_var)
     student_name = st.text_input(":blue[Enter student name]", placeholder="Name")
     model_id = st.selectbox(":blue[Select a model]", 
                             ["Qwen/Qwen2.5-72B-Instruct",
@@ -61,7 +59,8 @@ with st.sidebar:
     upload_student_report = st.file_uploader(":blue[Upload internship report]", 'pdf', help=report_help)
     evaluate_btn = st.button(":material/search_insights: Evaluate Report", type="primary")
     clear_btn = st.button(":material/refresh: Clear History", type="primary")
-
+    st.markdown(f'<span style="font-size:12px; color:gray;">{disclaimer_var}</span>', unsafe_allow_html=True)
+    
 # -- set model to session state ---# 
 if model_id:
     st.session_state.model_select = model_id
@@ -154,3 +153,9 @@ if clear_btn:
         st.rerun()
     except Exception as e:
         st.error(f"Error clearing history: {e}")
+
+
+
+
+# Load your image
+
