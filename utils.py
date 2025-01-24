@@ -1,7 +1,7 @@
 
 
 # custom CSS for buttons
-custom_css = """
+btn_css = """
 <style>
     .stButton > button {
         color: #383736; 
@@ -23,7 +23,15 @@ custom_css = """
 </style>
 """
 
+image_css = """
+<style>
+.stImage img {
+    border-radius: 50%;
+    #border: 5px solid #f8fae6;
+}
+</style>
 
+"""
 
 
 system_message_var = """
@@ -48,17 +56,16 @@ learning experiences and share in-depth details about their work and what they l
 
 
 
-model_help = ":red[Model with less parameters is faster but often at the expense of a quality answer.]"
+model_help = ":blue[Models with less parameters have faster inference speed but often at the expense of a more quality answer.]"
 
-rubrics_help = ":red[Upload the marking rubrics in PDF.]"
+rubrics_help = ":blue[Upload a set of marking rubrics with a **criterion** column in PDF.]"
 
-report_help =":red[Upload a student's internship report in PDF]"
+report_help =":blue[Report with more than 3,000 words may experience '*max limit token error*'. Click on **Clear History** and try again.]"
 
-eval_btn_help = ":red[Click to evaluate the internship report]"
+eval_btn_help = ":blue[Click to evaluate the internship report]"
 
 intro_var = """
-:gray[Assistive marking AI uses specific marking rubrics to evaluate reports.
-Marking rubrics ought to include a **criterion** column with the appropriate breakdown.]
+:blue[While AI marking can help with consistency and efficiency, it's crucial to review and verify the marks and feedback generated.]
 """
 
 disclaimer_var = "Disclaimer: This AI-powered tool is designed to assist in marking reports by providing helpful suggestions and evaluations. However, it may occasionally make errors or misinterpret content. Final judgment and accuracy should be verified by a qualified evaluator."

@@ -10,9 +10,10 @@ st.set_page_config(page_title="Assistive Marking AI Tool",
                    layout="wide",
                    page_icon="🐶",
                    initial_sidebar_state="expanded")
-#<div data-testid="stImageContainer" class="st-emotion-cache-1v0mbdj e1wa958q1"><img src="http://localhost:8501/media/3e3ef358147fb3104c7e13787e6a5c9b0f7c24f75e18f9a0c51f1513.jpg" alt="0" style="width: 100px; max-width: 100%;"></div>
-# ---------set button css-------------#
-st.markdown(custom_css, unsafe_allow_html=True)
+
+# ---------set css-------------#
+st.markdown(btn_css, unsafe_allow_html=True)
+st.markdown(image_css, unsafe_allow_html=True)
 
 # --- Initialize the Inference Client with the API key ----#
 try:
@@ -29,7 +30,7 @@ if "model_select" not in st.session_state:
 if 'msg_history' not in st.session_state:
     st.session_state.msg_history = []
     system_message = """
-    You are a friendly AI assistant to a teacher that provides helpful assistance.
+    Your name is Cosmo, a friendly AI assistant to a teacher that provides helpful assistance.
     Prompt the user to upload the marking rubrics and student's internship report if it is not available in your system.
     Look back at the chat history to find information if needed.
     """
@@ -44,23 +45,25 @@ for msg in st.session_state.msg_history:
 
 # ------- create side bar --------#
 with st.sidebar:
-    st.title("Assistive Marking AI Tool", help=intro_var)
-    student_name = st.text_input(":blue[Enter student name]", placeholder="Name")
-    model_id = st.selectbox(":blue[Select a model]", 
+    st.title(":rainbow[Cosmo]. :gray[Your friendly assistive marking AI]", help=intro_var)
+    st.image('cosmo.jpeg', width=80)
+    student_name = st.text_input(":blue[**Enter student name**]", placeholder="Name")
+    model_id = st.selectbox(":blue[**Select an AI model**]", 
                             ["Qwen/Qwen2.5-72B-Instruct",
                              "Qwen/Qwen2.5-Coder-32B-Instruct",
-                             "Qwen/QwQ-32B-Preview",
+                             #"Qwen/QwQ-32B-Preview",
                              "meta-llama/Llama-3.3-70B-Instruct",
                              "meta-llama/Llama-3.1-8B-Instruct"],
                             index=0,
                             help=model_help)
     
-    upload_mark_rubric = st.file_uploader(":blue[Marking rubrics]", 'pdf', help=rubrics_help)
-    upload_student_report = st.file_uploader(":blue[Upload internship report]", 'pdf', help=report_help)
+    upload_mark_rubric = st.file_uploader(":blue[**Upload marking rubrics**]", 'pdf', help=rubrics_help)
+    upload_student_report = st.file_uploader(":blue[**Upload a report**]", 'pdf', help=report_help)
     evaluate_btn = st.button(":material/search_insights: Evaluate Report", type="primary")
     clear_btn = st.button(":material/refresh: Clear History", type="primary")
     st.markdown(f'<span style="font-size:12px; color:gray;">{disclaimer_var}</span>', unsafe_allow_html=True)
     
+    #<div class="stImage st-emotion-cache-1dvmtd8 e1wa958q0" data-testid="stImage"><div data-testid="stImageContainer" class="st-emotion-cache-1v0mbdj e1wa958q1"><img src="http://localhost:8501/media/31bb050bccea069e88f4266924aea2d4d2e1dea57405cc3e795a6803.jpg" alt="0" style="width: 100px; max-width: 100%;"></div></div>
 # -- set model to session state ---# 
 if model_id:
     st.session_state.model_select = model_id
@@ -103,6 +106,7 @@ if evaluate_btn:
             st.divider()
             st.write(":grey[**Report Preview**]")
             pdf_viewer(upload_student_report.getvalue())
+            
         system_message = """
         - Mark the student's internship report using the given marking rubrics available to you. 
         - The internship report is written after a 6 month internship program, and students should be able to articulate their
