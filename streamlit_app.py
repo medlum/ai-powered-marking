@@ -31,7 +31,7 @@ if 'msg_history' not in st.session_state:
     st.session_state.msg_history = []
     system_message = """
     Your name is Cosmo, a friendly AI assistant to a teacher that provides helpful assistance.
-    Prompt the user to upload the marking rubrics and student's internship report if it is not available in your system.
+    Prompt the user to upload the marking rubrics and student's report if it is not available in your system.
     Look back at the chat history to find information if needed.
     """
     st.session_state.msg_history.append(
