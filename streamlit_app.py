@@ -51,7 +51,9 @@ with st.sidebar:
     model_id = st.selectbox(":blue[**Select an AI model**]", 
                             ["Qwen/Qwen2.5-72B-Instruct",
                              "Qwen/Qwen2.5-Coder-32B-Instruct",
+                             "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
                              #"Qwen/QwQ-32B-Preview",
+                             "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
                              "meta-llama/Llama-3.3-70B-Instruct",
                              "meta-llama/Llama-3.1-8B-Instruct"],
                             index=0,
@@ -92,7 +94,7 @@ if upload_student_report:
             student_report += page.extract_text()
         st.session_state.msg_history.append({
             "role": "system",
-            "content": f"Mark this internship report: {student_report} for student name: {student_name}"
+            "content": f"Mark this report: {student_report} for student name: {student_name}"
         })
     except Exception as e:
         st.error(f"Error processing student report: {e}")
@@ -108,12 +110,10 @@ if evaluate_btn:
             pdf_viewer(upload_student_report.getvalue())
             
         system_message = """
-        - Mark the student's internship report using the given marking rubrics available to you. 
-        - The internship report is written after a 6 month internship program, and students should be able to articulate their
-        learning experiences and share in-depth details about their work and what they learnt.
+        - Mark the student's report using the given marking rubrics available to you. 
         - Assign a mark for each of the criterion in the marking rubrics.
         - Do not assign more than the maximum mark found in each criterion.
-        - Write a short comment on each area after assigning the marks.
+        - Write a feedback for each criterion on the areas that are good or lacking and cite specific examples.
         - Tally the marks in each area.
         - Return the output with the areas, mark, comment in a table.
         - Return the total mark and an overall comment in strings.    
@@ -121,7 +121,7 @@ if evaluate_btn:
         st.session_state.msg_history.append({
             "role": "system", "content": f"{system_message}"
         })
-        button_pressed = "Please mark the internship report using the marking rubric given to you."
+        button_pressed = "Please mark the report using the marking rubric given to you."
     except Exception as e:
         st.error(f"Error during evaluation: {e}")
 
